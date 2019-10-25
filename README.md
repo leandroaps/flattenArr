@@ -2,27 +2,9 @@
 Array Flattening in 5 lines
 
 ```
-function flattenArr(arrToFlatten) {
-    return arrToFlatten.reduce((acc, value) => {
-      if (value instanceof Array) {
-        return acc.concat(flattenArr(value));
-      }
-      return acc.concat(value);
-    }, []);
-}
-```
-
-**Usage:**
-```
-const arr = [1, 2, 3, 4, [5, 6]];
-flattenArr(arr) // [1, 2, 3, 4, 5, 6]
-```
-
-
-```
 function flattenArr(arrToFlatten, depth) {
-    return arrToFlatten.reduce((acc, value) => {
-      if (value instanceof Array && depth > 0) {
+    return arrToFlatten.reduce((acc, value, index, array) => {
+      if (value instanceof Array && depth) {
         return acc.concat(flattenArr(value, depth - 1));
       }
       return acc.concat(value);
@@ -32,6 +14,7 @@ function flattenArr(arrToFlatten, depth) {
 
 **Usage:**
 ```
-const arr = [1, 2, 3, 4, [5, 6, [7, 8]]];
-flattenArr(arr, 1) // [1, 2, 3, 4, 5, 6, [7, 8]]
+const arr = [1,2,3,[4,5, [4,6,7,[8, 9, [10]]]]];
+console.log(flattenArr(arr, 1));
 ```
+
